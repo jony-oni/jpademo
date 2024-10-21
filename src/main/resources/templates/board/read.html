@@ -1,0 +1,105 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}"
+      lang="en">
+
+<div class="row-content">
+  <div class="card">
+    <div class="card-header">
+      Featured
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">게시글 등록</h5>
+      <form method="post" action="/board/register">
+      <div class="mb-3">
+        <label  class="form-label">Bno</label>
+        <input type="text" class="form-control" name="title" value="${dto.bno}" readonly>
+      </div>
+      <div class="mb-3">
+        <label  class="form-label">Title</label>
+        <input type="text" class="form-control" name="title" value="${dto.title}" readonly>
+      </div>
+      <div class="mb-3">
+        <label  class="form-label">Writer</label>
+        <input type="text" class="form-control" name="writer" value="${dto.writer}" readonly>
+      </div>
+      <div class="mb-3">
+        <label  class="form-label">VisitCount</label>
+        <input type="text" class="form-control" name="visitcount" value="${dto.visitcount}" readonly>
+      </div>
+      <div class="mb-3">
+        <label  class="form-label">PostDate</label>
+        <input type="text" class="form-control" name="postdate" value="${dto.postdate}" readonly>
+      </div>
+      <div class="mb-3">
+        <label  class="form-label">Content</label>
+        <textarea class="form-control" name="content" rows="3" readonly>${dto.content}</textarea>
+      </div>
+      <div class="mb-3">
+        <button type="button" class="btn btn-outline-success">Modify</button>
+        <button type="button" class="btn btn-outline-danger">Remove</button>
+        <button type="button" class="btn btn-outline-dark">BoardList</button>
+      </div>
+      </form>
+      <script>
+        document.querySelector(".btn-outline-success").addEventListener("click",function (e){
+          self.location='/board/modify?bno=${dto.bno}'
+        })
+        document.querySelector(".btn-outline-danger").addEventListener("click",function (e){
+          self.location='/board/remove?bno=${dto.bno}'
+        })
+        document.querySelector(".btn-outline-dark").addEventListener("click",function(e){
+          self.location="/board/list"
+        })
+      </script>
+    </div>
+  </div>
+</div>
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}"
+      lang="en">
+<div layout:fragment="content">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><b>Register Page</b></h5>
+      <!--<form action="/board/register" method="post">-->
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"><b>Bno</b></label>
+        <input type="text" name="bno" class="form-control" id="exampleFormControlInput1" th:value="${dto.bno}" readonly>
+      </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"><b>Title</b></label>
+          <input type="text" name="title" class="form-control" id="exampleFormControlInput2" th:value="${dto.title}" readonly>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"><b>Content</b></label>
+          <textarea name="content" class="form-control" id="exampleFormControlInput3" readonly>[[${dto.content}]]</textarea>
+
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlinput1" class="form-label"><b>Writer</b></label>
+          <input class="form-control" name="writer" id="exampleFormControlinput4" rows="5" th:value="${dto.writer}" readonly >
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"><b>VistitCount</b></label>
+          <input class="form-control" name="visitcount" id="exampleFormControlInput5" rows="5" th:value="${dto.visitcount}" readonly >
+        </div>
+
+        <div class="my-4">
+          <div class="float-end">
+            <a th:href="|@{/board/modify(bno=${dto.bno})}|" class="text-decoration-none">
+              <button type="submit" class="btn btn-success" >Modify</button>
+            </a>
+            <a th:href="|@{/board/list}|" class="text-decoration-none">
+              <button type="reset" class="btn btn-danger">List</button>
+            </a>
+          </div>
+        </div>
+      <!--</form>-->
+    </div>
+  </div>

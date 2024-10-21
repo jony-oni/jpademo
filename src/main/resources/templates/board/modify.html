@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}"
+      lang="en">
+<div layout:fragment="content">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><b>Register Page</b></h5>
+
+      <form action="/board/modify" method="post">
+        <input type="hidden" name="bno" th:value="${dto.bno}">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"><b>Title</b></label>
+          <input type="text" name="title" class="form-control" id="exampleFormControlInput1" th:value="${dto.title}">
+        </div>
+
+        <div class = "mb-3">
+          <label for="exampleFormControlInput1" class="form-label"><b>Writer</b></label>
+          <input type="text" name="writer" class="form-control" id="exampleFormControlInput2" th:value="${dto.writer}">
+        </div>
+
+        <div class = "mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label"><b>Content</b></label>
+          <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="5" >[[${dto.content}]]</textarea>
+        </div>
+
+        <div class="my-4">
+          <div class="float-end">
+            <button type="submit" id="modifyBtn" class="btn btn-success">Modify</button>
+            <button type="button" id="RemoveBtn" class="btn btn-danger">Reset</button>
+            <button type="button" id="ListBtn"  class="btn btn-dark">List</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<script layout:fragment="script" th:inline="javascript">
+  const formObj=document.querySelector("form")
+  document.querySelector("#modifyBtn").addEventListener("click", function (e){
+    e.preventDefault()
+    e.stopPropagation()
+    formObj.action="/board/modify"
+    formObj.method="post"
+    formObj.submit()
+  },false)
+  document.querySelector("#removeBtn").addEventListener("click", function (e){
+    e.preventDefault()
+    e.stopPropagation()
+    formObj.action="/board/remove"
+    formObj.method="post"
+    formObj.submit()
+  },false)
+  document.querySelector("#listbtn").addEventListener("click", function (e){
+    e.preventDefault()
+    e.stopPropagation()
+    formObj.reset()
+    self.location="/board/list"
+  },false)
+</script>
+</html>
